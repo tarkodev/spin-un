@@ -1,0 +1,124 @@
+
+Constructeur :
+
+constructor(modeGame: Mode, pointsNumber: number, nbMaxPlayers: number)
+    Description : 
+        Construit une instance de la classe Room avec les paramètres spécifiés.
+    Paramètres :
+        modeGame : Mode de jeu (Mode.classic ou Mode.spin).
+        pointsNumber : Nombre de points requis pour gagner la partie.
+        nbMaxPlayers : Nombre maximal de joueurs pouvant rejoindre la partie.
+
+
+Attributs :
+
+private _idRoom: number
+    Description : 
+        Identifiant de la salle de jeu.
+private _playersList: Player[]
+    Description : 
+        Liste des joueurs participants à la partie.
+private _game: Game | null
+    Description : 
+        Instance du jeu en cours dans la salle.
+private _isPrivate: boolean
+    Description : 
+        Indique si la salle est privée ou non.
+private _keyRoom?: string
+    Description : 
+        Clé d'accès à la salle (utilisée pour les salles privées).
+private _modeGame: Mode
+    Description : 
+        Mode de jeu de la salle (Mode.classic ou Mode.spin).
+private _pointsNumber: number
+    Description : 
+        Nombre de points requis pour gagner la partie.
+private _nbMaxPlayers: number
+    Description : 
+        Nombre maximal de joueurs pouvant rejoindre la partie.
+private _whosTurn: number
+    Description : 
+        Indice du joueur actuellement en train de jouer.
+private _numberRound: number
+    Description : 
+        Numéro du round en cours.
+private _isFinished: boolean
+    Description : 
+        Indique si la partie est terminée ou non.
+private _isBlocked: boolean
+    Description : 
+        Indique si la roue doit être tournée, la partie est bloquée pendant ce temps
+
+
+Méthodes :
+
+public nextRound(): void
+    Description : 
+        Passe au round suivant de la partie.
+
+public waitingPlayers(): Promise<void>
+    Description : 
+        Attend que les joueurs rejoignent la partie ou que le délai maximum soit écoulé.
+    Retour : 
+        Une promesse qui se résout lorsque les joueurs rejoignent la partie ou que le délai maximum est écoulé.
+
+public gameStart(): void
+    Description : 
+        Lance la partie en sélectionnant le jeu (ClassicUn ou SpinUn) en fonction du mode de jeu.
+
+public isEnd(): boolean
+    Description : 
+        Vérifie si la partie est terminée en fonction du nombre de points requis.
+    Retour : 
+        true si la partie est terminée, sinon false.
+
+public checkEffectOfTopOfDeposit(color: string): void
+    Description : 
+        Vérifie l'effet de la carte en haut du dépôt.
+    Paramètres :
+        color : Couleur de la carte.
+
+public checkEffectOfTopOfDepositJokerOrSuperJoker(color: string): void
+    Description : 
+        Vérifie l'effet de la carte Joker ou SuperJoker en haut du dépôt.
+    Paramètres :
+        color : Couleur de la carte.
+
+public checkIfJokerOrSuperJoker(): boolean
+    Description : 
+        Vérifie si la carte en haut du dépôt est un Joker ou un SuperJoker.
+    Retour : 
+        true si la carte est un Joker ou un SuperJoker, sinon false.
+
+public questionJokerColor(color: string): void
+    Description : 
+        Demande au joueur de choisir une couleur pour la carte Joker.
+    Paramètres :
+        color : Couleur de la carte Joker.
+
+public changeDirection(): void
+    Description : 
+        Change la direction du jeu.
+
+public skipNextPlayer(): void
+    Description : 
+        Passe au joueur suivant en fonction de la direction du jeu.
+
+public getRandomColor(): string
+    Description : 
+        Génère aléatoirement une couleur parmi les quatre couleurs du jeu.
+    Retour : 
+        Couleur générée aléatoirement.
+
+public drawTwoOrFourCards(p: Player, numberCards: number): void
+    Description : 
+        Fait piocher 2 ou 4 cartes au joueur spécifié.
+    Paramètres :
+        p : Joueur qui doit piocher les cartes.
+        numberCards : Nombre de cartes à piocher (doit être 2 ou 4).
+
+public addTwoOrFourCards(numberCards: number): void
+    Description : 
+        Fait piocher 2 ou 4 cartes au joueur suivant.
+    Paramètres :
+        numberCards : Nombre de cartes à piocher (doit être 2 ou 4).

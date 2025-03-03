@@ -1,0 +1,92 @@
+
+Constructeur :
+
+constructor(players: Player[])
+    Description : 
+        Construit une nouvelle instance de jeu.
+    Paramètres :
+        players : Une liste d'objets Player représentant les joueurs participant au jeu.
+
+Méthodes :
+
+public static shuffle(cardList: Card[]): void
+    Description : 
+        Mélange la liste des cartes donnée en paramètre.
+    Paramètres :
+        cardList : Une liste d'objets Card à mélanger.
+
+abstract createDrawStack(): Card[]
+    Description : 
+        Crée une pile de pioche en fonction du mode de jeu.
+    Retour : 
+        La pile de pioche créée.
+    Erreurs :
+        Lève une erreur si le mode est invalide.
+
+public cardDistribution(players: Player[]): void
+    Description : 
+        Redistribue les cartes aux joueurs.
+    Paramètres :
+        players : La liste des joueurs à qui distribuer les cartes.
+
+public remakeDrawStackIfNoCardIn(): void
+    Description : 
+        Remplace la pioche par le dépôt si la pioche est vide.
+    Erreurs :
+        Lève une erreur si le dépôt de cartes est vide.
+
+public deleteCardTopOfDrawStack(): Card
+    Description : 
+        Supprime la carte du dessus de la pioche.
+    Retour : 
+        La carte supprimée.
+    Erreurs :
+        Lève une erreur si la pioche est vide.
+
+public checkCardDeposit(): Card
+    Description : 
+        Vérifie la carte en haut du dépôt.
+    Retour : 
+        La carte en haut du dépôt.
+
+public isEndRound(): boolean
+    Description : 
+        Vérifie si le round est terminé.
+    Retour : 
+        Un booléen indiquant si le round est terminé.
+
+public endRound(): void
+    Description : 
+        Termine le round et détermine le gagnant.
+    Erreurs :
+        Lève une erreur si aucun joueur n'a de carte.
+
+Getters :
+
+public get players(): Player[]
+    Description : 
+        Récupère la liste des joueurs.
+    Retour : 
+        La liste des joueurs.
+
+public get cardDeposit(): Card[]
+    Description : 
+        Récupère le dépôt de cartes.
+    Retour : 
+        Le dépôt de cartes.
+
+public get drawStack(): Card[]
+    Description : 
+        Récupère la pioche.
+    Retour : 
+        La pioche.
+
+public get direction(): number
+    Description : 
+        Récupère la direction du jeu.
+    Retour : 
+        La direction du jeu.
+
+public turnDirection(): void
+    Description : 
+        Inverse la direction du jeu.

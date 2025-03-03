@@ -1,0 +1,38 @@
+La classe War représente le défi où les joueurs comparent les valeurs numériques de leurs cartes pour déterminer le gagnant de chaque manche.
+
+Constructeur :
+
+constructor(__playersList: Player[], __cardDeposit: Card[])
+    Description : 
+        Construit une instance de la classe War avec une liste de joueurs et un dépôt de cartes.
+    Paramètres :
+        __playersList : Un tableau d'objets Player représentant les joueurs participant au jeu.
+        __cardDeposit : Un tableau d'objets Card représentant les cartes déposées pendant le jeu.
+
+
+Méthodes :
+
+public playersWithCardNumeroted(): Player[]
+    Description : 
+        Sélectionne les joueurs ayant des cartes numérotées dans leur main.
+    Retour : 
+        Un tableau d'objets Player.
+
+
+public init(maxCardsArray: Card[]): Card[]
+    Description : 
+        Initialise le jeu en sélectionnant la carte numérotée la plus élevée dans la main de chaque joueur.
+    Paramètres :
+        maxCardsArray : Un tableau d'objets Card représentant les cartes maximales choisies par chaque joueur.
+    Retour : 
+        Un tableau d'objets Card représentant les cartes maximales choisies par chaque joueur.
+
+
+public startWar(maxCardsArray: Card[], searchPosition: number): Card[]
+    Description : 
+        Lance la phase de guerre du jeu, où les joueurs comparent leurs cartes maximales choisies pour déterminer le gagnant.
+    Paramètres :
+        maxCardsArray : Un tableau d'objets Card représentant les cartes maximales choisies par chaque joueur.
+        searchPosition : Un nombre représentant la position de recherche dans le tableau des cartes maximales.
+    Retour : 
+        Un tableau d'objets Card représentant le dépôt de cartes mis à jour après le défi.

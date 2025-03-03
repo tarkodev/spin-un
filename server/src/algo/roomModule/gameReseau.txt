@@ -1,0 +1,85 @@
+
+Constructeur :
+
+constructor(modeGame: Mode, pointsNumber: number, nbMaxPlayers: number, playerList: Player[])
+    Description : 
+        Construit une instance de la classe GameReseau avec une liste de joueurs et un dépôt de cartes.
+    Paramètres :
+        modeGame : Mode de jeu (Classique ou Spin).
+        pointsNumber : Nombre de points requis pour gagner.
+        nbMaxPlayers : Nombre maximal de joueurs.
+        playerList : Liste des joueurs participant au jeu.
+
+Méthodes :
+
+public playableCard(c: Card): boolean
+    Description : 
+        Vérifie si une carte peut être jouée sur le dessus du dépôt.
+    Paramètres :
+        c : Carte à vérifier.
+    Retour : 
+        true si la carte peut être jouée, sinon false.
+
+public isItIAToPlay(): boolean
+    Description : 
+        Vérifie si c'est au tour de l'IA de jouer.
+    Retour : 
+        true si c'est au tour de l'IA de jouer, sinon false.
+
+public playCardReseau(p: Player, indexCard: number): Status
+    Description : 
+        Permet à un joueur de jouer une carte.
+    Paramètres :
+        p : Joueur qui joue la carte.
+        indexCard : Index de la carte à jouer dans la main du joueur.
+    Retour : 
+        Statut de l'action (succès ou échec).
+
+public drawCardReseau(p: Player): Status
+    Description : 
+        Permet à un joueur de piocher une carte.
+    Paramètres :
+        p : Joueur qui pioche une carte.
+    Retour : 
+        Statut de l'action (succès ou échec).
+
+public changeRound(): void
+    Description : 
+        Passe au round suivant.
+
+public isRoundFinished(): Status
+    Description : 
+        Vérifie si le round est terminé.
+    Retour : 
+        Statut du round (succès ou échec).
+
+public isGameFinished(): Status
+    Description : 
+        Vérifie si la partie est terminée.
+    Retour : 
+        Statut de la partie (succès ou échec).
+
+public checkEffectOfTopOfDeposit(color: string): void
+    Description : 
+        Vérifie l'effet de la carte en haut du dépôt.
+    Paramètres :
+        color : Couleur à vérifier.
+
+public checkEffectOfTopOfDepositJokerOrSuperJoker(color: string): void
+    Description : 
+        Vérifie si la carte en haut du dépôt est un Joker ou un Super Joker.
+    Paramètres :
+        color : Couleur à vérifier.
+
+public checkIfJokerOrSuperJoker(): boolean
+    Description : 
+        Vérifie si la carte en haut du dépôt est un Joker ou un Super Joker.
+    Retour : 
+        true si la carte est un Joker ou un Super Joker, sinon false.
+
+public replacePlayerByIa(players: (Real | IA)[], login: string): void
+    Description : 
+        Remplace un joueur par une IA.
+    Paramètres :
+        players : Liste des joueurs.
+        login : Login du joueur à remplacer.

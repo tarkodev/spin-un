@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  web_server:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DATABASE_URL: ${DATABASE_URL}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      VITE_SOCKETIO_URL: ${VITE_SOCKETIO_URL}
+    ports:
+      - "10000:10000"
+  test-web_server:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DATABASE_URL: ${DATABASE_URL}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      VITE_SOCKETIO_URL: ${VITE_SOCKETIO_URL}
+    command: "npm run test"
+  game_server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DATABASE_URL: ${DATABASE_URL}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      OPT_CODE: ${OPT_CODE}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+    ports:
+      - "10004:10004"
+      - "10001:8080"
+  test-game_server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DATABASE_URL: ${DATABASE_URL}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      OPT_CODE: ${OPT_CODE}
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+    command: "npm run test"
+  prisma_studio:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      DATABASE_URL: ${DATABASE_URL}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      SECRET_KEY: ${SECRET_KEY}
+    command: "npx prisma studio"
+    ports:
+      - "10003:5555"
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - spin_un:/var/lib/mysql
+    ports:
+      - "10006:3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "10005:8080"
+
+volumes:
+  spin_un:

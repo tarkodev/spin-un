@@ -1,0 +1,85 @@
+La classe Player représente un joueur réel ou une intelligence artificielle participant au jeu.
+
+Attributs :
+
+    _hand : Un tableau d'objets Card représentant la main du joueur.
+    _points : Un nombre représentant le nombre de points du joueur.
+    _login : Une chaîne de caractères représentant le login du joueur.
+    _isWinner : Un booléen indiquant si le joueur est le gagnant de la partie.
+    _isHandVisile : Un booléen indiquant si la main du joueur est visible par les autres joueurs.
+
+Constructeur :
+
+constructor(_login: string)
+    Description :
+        Construit une instance de la classe Player avec un login spécifié.
+    Paramètres :
+        _login : Une chaîne de caractères représentant le login du joueur.
+
+
+Méthodes :
+
+public drawCard(drawStack: Card[], cardDeposit: Card[]): void
+    Description :
+        Permet à un joueur de piocher une carte.
+    Paramètres :
+        drawStack : Un tableau d'objets Card représentant la pioche.
+        cardDeposit : Un tableau d'objets Card représentant le dépôt de cartes.
+    Retour :
+        Ne retourne rien, modifie les tableaux en place.
+
+
+public playCard(c: Card, cardDeposit: Card[]): void
+    Description :
+        Permet à un joueur de jouer une carte sur le dépôt.
+    Paramètres :
+        c : Un objet Card représentant la carte à jouer.
+        cardDeposit : Un tableau d'objets Card représentant le dépôt de cartes.
+    Retour :
+        Ne retourne rien, modifie les tableaux en place.
+
+
+public playableRandomCard(cardDeposit: Card[]): number
+    Description :
+        Permet à une intelligence artificielle ou à un joueur réel de jouer une carte de manière aléatoire.
+    Paramètres :
+        cardDeposit : Un tableau d'objets Card représentant le dépôt de cartes.
+    Retour :
+        Un nombre correspondant à un message d'information sur l'action effectuée.
+
+
+public abstract treatmentChallengeWheel(
+  challengeWheel: number,
+  playersList: Player[],
+  drawStack: Card[],
+  cardDeposit: Card[]
+): void
+    Description :
+        Méthode abstraite permettant à un joueur de traiter un défi lancé par la roue.
+    Paramètres :
+        challengeWheel : Un nombre représentant le défi lancé par la roue.
+        playersList : Un tableau d'objets Player représentant la liste des joueurs.
+        drawStack : Un tableau d'objets Card représentant la pioche.
+        cardDeposit : Un tableau d'objets Card représentant le dépôt de cartes.
+    Retour :
+        Ne retourne rien.
+
+
+public challenge(p: Player, cardDeposit: Card[], drawStack: Card[]): void
+    Description :
+        Permet à un joueur de défier un autre joueur après qu'un SuperJoker ait été posé.
+    Paramètres :
+        p : Un objet Player représentant le joueur à défier.
+        cardDeposit : Un tableau d'objets Card représentant le dépôt de cartes.
+        drawStack : Un tableau d'objets Card représentant la pioche.
+    Retour :
+        Ne retourne rien.
+
+
+public spinWheel(wheel: number[]): number
+    Description :
+        Permet à un joueur de faire tourner la roue des défis.
+    Paramètres :
+        wheel : Un tableau de nombres représentant les défis de la roue.
+    Retour :
+        Un nombre correspondant au défi choisi.

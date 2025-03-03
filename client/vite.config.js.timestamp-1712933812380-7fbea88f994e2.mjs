@@ -1,0 +1,14 @@
+// vite.config.js
+import { defineConfig } from "file:///mnt/d/COURS%20TP/projet-integrateur/client/node_modules/vite/dist/node/index.js";
+import { svelte } from "file:///mnt/d/COURS%20TP/projet-integrateur/client/node_modules/@sveltejs/vite-plugin-svelte/src/index.js";
+var vite_config_default = defineConfig({
+  base: process.env.DEV_ENV == "true" ? "/" : "./",
+  build: {
+    outDir: "electron/build"
+  },
+  plugins: [svelte()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvbW50L2QvQ09VUlMgVFAvcHJvamV0LWludGVncmF0ZXVyL2NsaWVudFwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiL21udC9kL0NPVVJTIFRQL3Byb2pldC1pbnRlZ3JhdGV1ci9jbGllbnQvdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL21udC9kL0NPVVJTJTIwVFAvcHJvamV0LWludGVncmF0ZXVyL2NsaWVudC92aXRlLmNvbmZpZy5qc1wiO2ltcG9ydCB7IGRlZmluZUNvbmZpZyB9IGZyb20gJ3ZpdGUnXG5pbXBvcnQgeyBzdmVsdGUgfSBmcm9tICdAc3ZlbHRlanMvdml0ZS1wbHVnaW4tc3ZlbHRlJ1xuXG4vLyBodHRwczovL3ZpdGVqcy5kZXYvY29uZmlnL1xuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgYmFzZTogcHJvY2Vzcy5lbnYuREVWX0VOViA9PSAndHJ1ZScgPyAnLycgOiAnLi8nLFxuICBidWlsZDoge1xuICAgIG91dERpcjogJ2VsZWN0cm9uL2J1aWxkJ1xuICB9LFxuICBwbHVnaW5zOiBbc3ZlbHRlKCldLFxufSlcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBK1MsU0FBUyxvQkFBb0I7QUFDNVUsU0FBUyxjQUFjO0FBR3ZCLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzFCLE1BQU0sUUFBUSxJQUFJLFdBQVcsU0FBUyxNQUFNO0FBQUEsRUFDNUMsT0FBTztBQUFBLElBQ0wsUUFBUTtBQUFBLEVBQ1Y7QUFBQSxFQUNBLFNBQVMsQ0FBQyxPQUFPLENBQUM7QUFDcEIsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+    previewFeatures = ["referentialActions"]
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id              Int      @id @default(autoincrement())
+    email           String?  @unique
+    login           String   @unique
+    password        String
+    bio             String?
+    createAt        DateTime @default(now())
+    updateAt        DateTime @updatedAt
+    listEmoji       String?
+    coin           Int      @default(0)
+    score           Int      @default(0)
+    profilePicture   Int?
+
+
+    isFriendOf Friend[] @relation("isFriendOf") // les amis d'un utilisateur
+    hasFriend Friend[] @relation("hasFriend") // est ami avec les utilisateur
+    
+    game   UserGame[] // Un utilisateur peut avoir joué à plusieurs parties 
+}
+
+model Friend {
+    // Est ami avec : clé étrangère vers User
+    isFriendOf User @relation("isFriendOf", fields: [isFriendOfLogin], references: [login], onDelete: Cascade)
+    isFriendOfLogin String
+
+    // A pour ami : clé étrangère vers User
+    hasFriend User @relation("hasFriend", fields: [hasFriendLogin], references: [login], onDelete: Cascade)
+    hasFriendLogin String
+
+    addedAt DateTime @updatedAt
+
+    // Clé primaire de la table
+    @@id(name: "id", fields: [isFriendOfLogin, hasFriendLogin])
+}
+
+
+model Game {
+    id           Int        @id @default(autoincrement())
+    beganAt      DateTime   @default(now())
+    finishedAt   DateTime?
+    selectedMode String
+    accessMode   String
+    user         UserGame[] // Une partie peut avoir été joué par plusieurs utilisateurs
+}
+
+model UserGame {
+    // Clé étrangère vers la table User
+    userLogin String
+    user   User @relation(fields: [userLogin], references: [login], onDelete: Cascade)
+
+    // Clé étrangère vers la table Game
+    gameId Int
+    game   Game @relation(fields: [gameId], references: [id])
+
+    score      Int?
+    rankInGame Int?
+
+    // Clé primaire de la table UserGame
+    @@id(name: "id", [userLogin, gameId])
+}

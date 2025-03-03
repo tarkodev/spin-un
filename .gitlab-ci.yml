@@ -1,0 +1,142 @@
+stages:
+  - Build
+  - Test
+  - Deploy
+
+# variable per branch
+
+variables:
+  DATABASE_URL: "null"
+
+before_script:
+  - >
+    if [ "$CI_COMMIT_BRANCH" = "main" ]; then
+      export DATABASE_URL=${DATABASE_URL__MAIN};
+      export VITE_SERVER_URL=${VITE_SERVER_URL__MAIN};
+    elif [ "$CI_COMMIT_BRANCH" = "dev" ]; then
+      export DATABASE_URL=${DATABASE_URL__DEV};
+      export VITE_SERVER_URL=${VITE_SERVER_URL__DEV};
+    fi
+  - echo "DATABASE_URL is set to $DATABASE_URL"
+  - echo "VITE_SERVER_URL is set to $VITE_SERVER_URL"
+
+# branch dev
+
+build:
+  stage: Build
+  script:
+    - docker compose build web_server test-web_server game_server test-game_server prisma_studio
+  tags:
+    - vmProjetIntegrateurgrp2-0
+  only:
+    - dev
+
+database:
+  stage: Build
+  script:
+    - docker compose build db adminer
+    - docker compose down db adminer
+    - docker compose up -d db adminer
+  tags:
+    - vmProjetIntegrateurgrp2-1
+  only:
+    - dev
+
+test-web_server:
+  stage: Test
+  script:
+    - docker compose up test-web_server
+  tags:
+    - vmProjetIntegrateurgrp2-0
+  needs:
+    - build
+  only:
+    - dev
+
+test-game_server:
+  stage: Test
+  script:
+    - docker compose up test-game_server
+  tags:
+    - vmProjetIntegrateurgrp2-0
+  needs:
+    - build
+  only:
+    - dev
+
+deploy-web_server:
+  stage: Deploy
+  script:
+    - docker compose down web_server
+    - docker compose up -d web_server
+  tags:
+    - vmProjetIntegrateurgrp2-0
+  needs:
+    - test-web_server
+    - test-game_server
+    - deploy-game_server
+  only:
+    - dev
+
+deploy-game_server:
+  stage: Deploy
+  script:
+    - docker compose down game_server prisma_studio
+    - docker compose up -d game_server prisma_studio
+  tags:
+    - vmProjetIntegrateurgrp2-0
+  needs:
+    - test-web_server
+    - test-game_server
+  only:
+    - dev
+
+# branch main
+
+build__main:
+  stage: Build
+  script:
+    - docker compose build
+  tags:
+    - ovhTarkod
+  only:
+    - main
+
+deploy-database__main:
+  stage: Deploy
+  script:
+    - docker compose down db adminer
+    - docker compose up -d db adminer
+  tags:
+    - ovhTarkod
+  needs:
+    - build__main
+  only:
+    - main
+
+deploy-game_server__main:
+  stage: Deploy
+  script:
+    - docker compose down game_server
+    - docker compose up -d game_server
+  tags:
+    - ovhTarkod
+  needs:
+    - build__main
+    - deploy-database__main
+  only:
+    - main
+
+deploy-web_server__main:
+  stage: Deploy
+  script:
+    - docker compose down web_server
+    - docker compose up -d web_server
+  tags:
+    - ovhTarkod
+  needs:
+    - build__main
+    - deploy-game_server__main
+  only:
+    - main
+
